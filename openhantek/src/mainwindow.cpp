@@ -518,7 +518,8 @@ MainWindow::MainWindow( HantekDsoControl *dsoControl, DsoSettings *settings, Exp
                                              QChar( '0' ) ); // FW version
         QMessageBox::about(
             this, QString( "%1 (%2)" ).arg( QCoreApplication::applicationName(), VERSION ),
-            QString( tr( "<p><b>OSDiag Scope</b> - edicion automotriz de OSDiag Ingenieria Automotriz, "
+            QString( tr( "<p><img src=':/osdiag/logo.png' width='320'/></p>"
+                         "<p><b>OSDiag Scope</b> - edicion automotriz de OSDiag Ingenieria Automotriz, "
                          "basada en OpenHantek6022 (GPL-2.0-or-later)</p>"
                          "<p>Open source software for Hantek6022 USB oscilloscopes</p>"
                          "<p>Maintainer: Martin Homuth-Rosemann</p>"

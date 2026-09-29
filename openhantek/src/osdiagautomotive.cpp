@@ -16,6 +16,11 @@
 #include <QDir>
 #include <QDockWidget>
 #include <QFileInfo>
+#include <QHBoxLayout>
+#include <QIcon>
+#include <QImage>
+#include <QPainter>
+#include <QPixmap>
 #include <QInputDialog>
 #include <QLabel>
 #include <QMenu>
@@ -80,7 +85,7 @@ void MainWindow::setupOsdiagAutomotive( const Dso::ControlSpecification *spec ) 
     // connection guide dock
     osdiagGuideDock = new QDockWidget( tr( "Guia OSDiag" ), this );
     osdiagGuideDock->setObjectName( "OSDiagGuideDock" );
-    osdiagGuideLabel = new QLabel( osdiagGuideDock );
+    osdiagGuideLabel = new QLabel();
     osdiagGuideLabel->setWordWrap( true );
     osdiagGuideLabel->setTextFormat( Qt::RichText );
     osdiagGuideLabel->setAlignment( Qt::AlignTop | Qt::AlignLeft );
@@ -88,7 +93,33 @@ void MainWindow::setupOsdiagAutomotive( const Dso::ControlSpecification *spec ) 
     osdiagGuideLabel->setText( tr( "<b>OSDiag Ingenieria Automotriz</b><br/><br/>"
                                    "Elige una prueba en el menu <i>Automotriz</i>: el osciloscopio se configura solo "
                                    "y aqui aparece como conectar las puntas." ) );
-    osdiagGuideDock->setWidget( osdiagGuideLabel );
+    // OSDiag logo on top of the guide text
+    QWidget *guideWidget = new QWidget( osdiagGuideDock );
+    QHBoxLayout *guideLayout = new QHBoxLayout( guideWidget );
+    guideLayout->setContentsMargins( 4, 4, 4, 4 );
+    QLabel *logoLabel = new QLabel( guideWidget );
+    logoLabel->setPixmap( QPixmap( ":/osdiag/logo.png" ).scaledToHeight( 56, Qt::SmoothTransformation ) );
+    logoLabel->setAlignment( Qt::AlignTop | Qt::AlignLeft );
+    guideLayout->addWidget( logoLabel, 0, Qt::AlignTop );
+    guideLayout->addWidget( osdiagGuideLabel, 1 );
+    osdiagGuideDock->setWidget( guideWidget );
+    // window icon: the "OS" part of the logo on a rounded badge
+    {
+        const QPixmap logo( ":/osdiag/logo.png" );
+        const QImage logoImage = logo.toImage();
+        QPixmap icon( 128, 128 );
+        icon.fill( Qt::transparent );
+        QPainter painter( &icon );
+        painter.setRenderHint( QPainter::Antialiasing );
+        painter.setRenderHint( QPainter::SmoothPixmapTransform );
+        painter.setPen( Qt::NoPen );
+        painter.setBrush( logoImage.pixelColor( 80, 2 ) ); // background color of the logo around "OS"
+        painter.drawRoundedRect( 0, 0, 128, 128, 22, 22 );
+        const QPixmap os = logo.copy( 3, 4, 157, 58 ).scaledToWidth( 118, Qt::SmoothTransformation );
+        painter.drawPixmap( ( 128 - os.width() ) / 2, ( 128 - os.height() ) / 2, os );
+        painter.end();
+        setWindowIcon( QIcon( icon ) );
+    }
     addDockWidget( Qt::BottomDockWidgetArea, osdiagGuideDock );
     if ( ui->menuView )
         ui->menuView->addAction( osdiagGuideDock->toggleViewAction() );
