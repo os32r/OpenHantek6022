@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/osdiag">
+        <file alias="01_CKP_inductivo.conf">osdiag/01_CKP_inductivo.conf</file>
+        <file alias="02_CKP_CMP_Hall.conf">osdiag/02_CKP_CMP_Hall.conf</file>
+        <file alias="03_Inyector_saturado_12V.conf">osdiag/03_Inyector_saturado_12V.conf</file>
+        <file alias="04_Bobina_primario.conf">osdiag/04_Bobina_primario.conf</file>
+        <file alias="05_Disparo_COP_IGT.conf">osdiag/05_Disparo_COP_IGT.conf</file>
+        <file alias="06_Sensor_O2_zirconio.conf">osdiag/06_Sensor_O2_zirconio.conf</file>
+        <file alias="07_Sensor_analogico_0-5V.conf">osdiag/07_Sensor_analogico_0-5V.conf</file>
+        <file alias="08_Bateria_arranque_12V.conf">osdiag/08_Bateria_arranque_12V.conf</file>
+        <file alias="09_Bateria_arranque_24V.conf">osdiag/09_Bateria_arranque_24V.conf</file>
+        <file alias="10_Solenoide_PWM_24V.conf">osdiag/10_Solenoide_PWM_24V.conf</file>
+        <file alias="11_CAN_500k.conf">osdiag/11_CAN_500k.conf</file>
+        <file alias="12_CAN_J1939_250k.conf">osdiag/12_CAN_J1939_250k.conf</file>
+    </qresource>
+</RCC>
