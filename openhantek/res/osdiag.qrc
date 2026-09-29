@@ -12,5 +12,6 @@
         <file alias="10_Solenoide_PWM_24V.conf">osdiag/10_Solenoide_PWM_24V.conf</file>
         <file alias="11_CAN_500k.conf">osdiag/11_CAN_500k.conf</file>
         <file alias="12_CAN_J1939_250k.conf">osdiag/12_CAN_J1939_250k.conf</file>
+        <file alias="logo.png">osdiag/logo.png</file>
     </qresource>
 </RCC>
