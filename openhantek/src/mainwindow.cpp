@@ -132,11 +132,11 @@ MainWindow::MainWindow( HantekDsoControl *dsoControl, DsoSettings *settings, Exp
 
     // Window title
     setWindowIcon( QIcon( ":/images/OpenHantek.svg" ) );
-    setWindowTitle( dsoControl->getDevice()->isRealHW()
+    setWindowTitle( QString( "OSDiag Scope - " ) + ( dsoControl->getDevice()->isRealHW()
                         ? tr( "OpenHantek6022 (%1) - Device %2 (FW%3)" )
                               .arg( QString::fromStdString( VERSION ), dsoControl->getModel()->name )
                               .arg( dsoControl->getDevice()->getFwVersion(), 4, 16, QChar( '0' ) )
-                        : tr( "OpenHantek6022 (%1) - " ).arg( QString::fromStdString( VERSION ) ) + tr( "Demo Mode" ) );
+                        : tr( "OpenHantek6022 (%1) - " ).arg( QString::fromStdString( VERSION ) ) + tr( "Demo Mode" ) ) );
 
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 6, 0 ) )
     setDockOptions( dockOptions() | QMainWindow::GroupedDragging );
@@ -426,6 +426,8 @@ MainWindow::MainWindow( HantekDsoControl *dsoControl, DsoSettings *settings, Exp
         }
     } );
 
+    setupOsdiagAutomotive( spec );
+
     connect( ui->actionSave, &QAction::triggered, this, [ this ]() {
         dsoSettings->mainWindowGeometry = saveGeometry();
         dsoSettings->mainWindowState = saveState();
@@ -516,7 +518,9 @@ MainWindow::MainWindow( HantekDsoControl *dsoControl, DsoSettings *settings, Exp
                                              QChar( '0' ) ); // FW version
         QMessageBox::about(
             this, QString( "%1 (%2)" ).arg( QCoreApplication::applicationName(), VERSION ),
-            QString( tr( "<p>Open source software for Hantek6022 USB oscilloscopes</p>"
+            QString( tr( "<p><b>OSDiag Scope</b> - edicion automotriz de OSDiag Ingenieria Automotriz, "
+                         "basada en OpenHantek6022 (GPL-2.0-or-later)</p>"
+                         "<p>Open source software for Hantek6022 USB oscilloscopes</p>"
                          "<p>Maintainer: Martin Homuth-Rosemann</p>"
                          "<p>Copyright &copy; 2010, 2011 Oliver Haag</p>"
                          "<p>Copyright &copy; 2012-%1 OpenHantek community<br/>"

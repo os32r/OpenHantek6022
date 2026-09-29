@@ -21,6 +21,8 @@ class TriggerDock;
 class SpectrumDock;
 class VoltageDock;
 class QAction;
+class QLabel;
+class QDockWidget;
 
 namespace Ui {
 class MainWindow;
@@ -68,6 +70,12 @@ class MainWindow : public QMainWindow {
 
     bool openDocument( QString docName );
     void setDeviceCommandUiEnabled( bool enabled );
+
+    // OSDiag: menu "Automotriz" with measurement presets and a connection guide dock
+    void setupOsdiagAutomotive( const Dso::ControlSpecification *spec );
+    void applyOsdiagPreset( const QString &fileName, const Dso::ControlSpecification *spec );
+    QLabel *osdiagGuideLabel = nullptr;
+    QDockWidget *osdiagGuideDock = nullptr;
 
     QList< QWidget * > deviceCommandWidgets;
     QList< QAction * > deviceCommandActions;
